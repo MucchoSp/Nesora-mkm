@@ -1,8 +1,8 @@
-# Install script for directory: /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One
+# Install script for directory: /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/install/cmake")
+  set(CMAKE_INSTALL_PREFIX "/Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/install/cmake")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -52,6 +52,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "/Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "/Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

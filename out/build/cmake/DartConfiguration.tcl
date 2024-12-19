@@ -4,8 +4,8 @@
 
 
 # Configuration directories and files
-SourceDirectory: /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One
-BuildDirectory: /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake
+SourceDirectory: /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm
+BuildDirectory: /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake
 
 # Where to place the cost data store
 CostDataFile: 
@@ -27,7 +27,7 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/opt/homebrew/Cellar/cmake/3.30.0/bin/cmake" "/Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One"
+ConfigureCommand: "/opt/homebrew/Cellar/cmake/3.30.0/bin/cmake" "/Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm"
 MakeCommand: /opt/homebrew/Cellar/cmake/3.30.0/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 

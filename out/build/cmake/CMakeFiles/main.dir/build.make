@@ -53,10 +53,10 @@ RM = /opt/homebrew/Cellar/cmake/3.30.0/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One
+CMAKE_SOURCE_DIR = /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake
+CMAKE_BINARY_DIR = /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake
 
 # Include any dependencies generated for this target.
 include CMakeFiles/main.dir/depend.make
@@ -70,46 +70,31 @@ include CMakeFiles/main.dir/progress.make
 include CMakeFiles/main.dir/flags.make
 
 CMakeFiles/main.dir/main.cpp.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/main.cpp.o: /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/main.cpp
+CMakeFiles/main.dir/main.cpp.o: /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/main.cpp
 CMakeFiles/main.dir/main.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/main.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/main.cpp.o -MF CMakeFiles/main.dir/main.cpp.o.d -o CMakeFiles/main.dir/main.cpp.o -c /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/main.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/main.cpp.o -MF CMakeFiles/main.dir/main.cpp.o.d -o CMakeFiles/main.dir/main.cpp.o -c /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/main.cpp
 
 CMakeFiles/main.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/main.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/main.cpp > CMakeFiles/main.dir/main.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/main.cpp > CMakeFiles/main.dir/main.cpp.i
 
 CMakeFiles/main.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/main.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/main.cpp -o CMakeFiles/main.dir/main.cpp.s
-
-CMakeFiles/main.dir/src/Nesora.cpp.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/src/Nesora.cpp.o: /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/src/Nesora.cpp
-CMakeFiles/main.dir/src/Nesora.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/src/Nesora.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/Nesora.cpp.o -MF CMakeFiles/main.dir/src/Nesora.cpp.o.d -o CMakeFiles/main.dir/src/Nesora.cpp.o -c /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/src/Nesora.cpp
-
-CMakeFiles/main.dir/src/Nesora.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/Nesora.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/src/Nesora.cpp > CMakeFiles/main.dir/src/Nesora.cpp.i
-
-CMakeFiles/main.dir/src/Nesora.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/Nesora.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/src/Nesora.cpp -o CMakeFiles/main.dir/src/Nesora.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/main.cpp -o CMakeFiles/main.dir/main.cpp.s
 
 # Object files for target main
 main_OBJECTS = \
-"CMakeFiles/main.dir/main.cpp.o" \
-"CMakeFiles/main.dir/src/Nesora.cpp.o"
+"CMakeFiles/main.dir/main.cpp.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
 main: CMakeFiles/main.dir/main.cpp.o
-main: CMakeFiles/main.dir/src/Nesora.cpp.o
 main: CMakeFiles/main.dir/build.make
+main: libnesora_main_lib.a
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -121,6 +106,6 @@ CMakeFiles/main.dir/clean:
 .PHONY : CMakeFiles/main.dir/clean
 
 CMakeFiles/main.dir/depend:
-	cd /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake/CMakeFiles/main.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake/CMakeFiles/main.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/main.dir/depend
 

@@ -7,7 +7,7 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/CMakeLists.txt"
+  "/Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/CMakeLists.txt"
   "CMakeFiles/3.30.0/CMakeCCompiler.cmake"
   "CMakeFiles/3.30.0/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.30.0/CMakeSystem.cmake"
@@ -85,5 +85,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/ContinuousCoverage.dir/DependInfo.cmake"
   "CMakeFiles/ContinuousMemCheck.dir/DependInfo.cmake"
   "CMakeFiles/ContinuousSubmit.dir/DependInfo.cmake"
+  "CMakeFiles/nesora_main_lib.dir/DependInfo.cmake"
   "CMakeFiles/main.dir/DependInfo.cmake"
   )

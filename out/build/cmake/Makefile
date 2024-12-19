@@ -57,10 +57,10 @@ RM = /opt/homebrew/Cellar/cmake/3.30.0/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One
+CMAKE_SOURCE_DIR = /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake
+CMAKE_BINARY_DIR = /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -78,7 +78,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool for source..."
-	/opt/homebrew/Cellar/cmake/3.30.0/bin/cpack --config ./CPackSourceConfig.cmake /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake/CPackSourceConfig.cmake
+	/opt/homebrew/Cellar/cmake/3.30.0/bin/cpack --config ./CPackSourceConfig.cmake /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -117,9 +117,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake/CMakeFiles /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake/CMakeFiles /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -511,6 +511,19 @@ ContinuousSubmit/fast:
 .PHONY : ContinuousSubmit/fast
 
 #=============================================================================
+# Target rules for targets named nesora_main_lib
+
+# Build rule for target.
+nesora_main_lib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 nesora_main_lib
+.PHONY : nesora_main_lib
+
+# fast build rule for target.
+nesora_main_lib/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nesora_main_lib.dir/build.make CMakeFiles/nesora_main_lib.dir/build
+.PHONY : nesora_main_lib/fast
+
+#=============================================================================
 # Target rules for targets named main
 
 # Build rule for target.
@@ -547,29 +560,77 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/Nesora.o: src/Nesora.cpp.o
-.PHONY : src/Nesora.o
+src/Nesora/Nesora.o: src/Nesora/Nesora.cpp.o
+.PHONY : src/Nesora/Nesora.o
 
 # target to build an object file
-src/Nesora.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Nesora.cpp.o
-.PHONY : src/Nesora.cpp.o
+src/Nesora/Nesora.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nesora_main_lib.dir/build.make CMakeFiles/nesora_main_lib.dir/src/Nesora/Nesora.cpp.o
+.PHONY : src/Nesora/Nesora.cpp.o
 
-src/Nesora.i: src/Nesora.cpp.i
-.PHONY : src/Nesora.i
+src/Nesora/Nesora.i: src/Nesora/Nesora.cpp.i
+.PHONY : src/Nesora/Nesora.i
 
 # target to preprocess a source file
-src/Nesora.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Nesora.cpp.i
-.PHONY : src/Nesora.cpp.i
+src/Nesora/Nesora.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nesora_main_lib.dir/build.make CMakeFiles/nesora_main_lib.dir/src/Nesora/Nesora.cpp.i
+.PHONY : src/Nesora/Nesora.cpp.i
 
-src/Nesora.s: src/Nesora.cpp.s
-.PHONY : src/Nesora.s
+src/Nesora/Nesora.s: src/Nesora/Nesora.cpp.s
+.PHONY : src/Nesora/Nesora.s
 
 # target to generate assembly for a file
-src/Nesora.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Nesora.cpp.s
-.PHONY : src/Nesora.cpp.s
+src/Nesora/Nesora.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nesora_main_lib.dir/build.make CMakeFiles/nesora_main_lib.dir/src/Nesora/Nesora.cpp.s
+.PHONY : src/Nesora/Nesora.cpp.s
+
+src/Nesora/NesoraInterpreter.o: src/Nesora/NesoraInterpreter.cpp.o
+.PHONY : src/Nesora/NesoraInterpreter.o
+
+# target to build an object file
+src/Nesora/NesoraInterpreter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nesora_main_lib.dir/build.make CMakeFiles/nesora_main_lib.dir/src/Nesora/NesoraInterpreter.cpp.o
+.PHONY : src/Nesora/NesoraInterpreter.cpp.o
+
+src/Nesora/NesoraInterpreter.i: src/Nesora/NesoraInterpreter.cpp.i
+.PHONY : src/Nesora/NesoraInterpreter.i
+
+# target to preprocess a source file
+src/Nesora/NesoraInterpreter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nesora_main_lib.dir/build.make CMakeFiles/nesora_main_lib.dir/src/Nesora/NesoraInterpreter.cpp.i
+.PHONY : src/Nesora/NesoraInterpreter.cpp.i
+
+src/Nesora/NesoraInterpreter.s: src/Nesora/NesoraInterpreter.cpp.s
+.PHONY : src/Nesora/NesoraInterpreter.s
+
+# target to generate assembly for a file
+src/Nesora/NesoraInterpreter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nesora_main_lib.dir/build.make CMakeFiles/nesora_main_lib.dir/src/Nesora/NesoraInterpreter.cpp.s
+.PHONY : src/Nesora/NesoraInterpreter.cpp.s
+
+src/Nesora/NesoraStringFormat.o: src/Nesora/NesoraStringFormat.cpp.o
+.PHONY : src/Nesora/NesoraStringFormat.o
+
+# target to build an object file
+src/Nesora/NesoraStringFormat.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nesora_main_lib.dir/build.make CMakeFiles/nesora_main_lib.dir/src/Nesora/NesoraStringFormat.cpp.o
+.PHONY : src/Nesora/NesoraStringFormat.cpp.o
+
+src/Nesora/NesoraStringFormat.i: src/Nesora/NesoraStringFormat.cpp.i
+.PHONY : src/Nesora/NesoraStringFormat.i
+
+# target to preprocess a source file
+src/Nesora/NesoraStringFormat.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nesora_main_lib.dir/build.make CMakeFiles/nesora_main_lib.dir/src/Nesora/NesoraStringFormat.cpp.i
+.PHONY : src/Nesora/NesoraStringFormat.cpp.i
+
+src/Nesora/NesoraStringFormat.s: src/Nesora/NesoraStringFormat.cpp.s
+.PHONY : src/Nesora/NesoraStringFormat.s
+
+# target to generate assembly for a file
+src/Nesora/NesoraStringFormat.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nesora_main_lib.dir/build.make CMakeFiles/nesora_main_lib.dir/src/Nesora/NesoraStringFormat.cpp.s
+.PHONY : src/Nesora/NesoraStringFormat.cpp.s
 
 # Help Target
 help:
@@ -611,12 +672,19 @@ help:
 	@echo "... NightlyTest"
 	@echo "... NightlyUpdate"
 	@echo "... main"
+	@echo "... nesora_main_lib"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... src/Nesora.o"
-	@echo "... src/Nesora.i"
-	@echo "... src/Nesora.s"
+	@echo "... src/Nesora/Nesora.o"
+	@echo "... src/Nesora/Nesora.i"
+	@echo "... src/Nesora/Nesora.s"
+	@echo "... src/Nesora/NesoraInterpreter.o"
+	@echo "... src/Nesora/NesoraInterpreter.i"
+	@echo "... src/Nesora/NesoraInterpreter.s"
+	@echo "... src/Nesora/NesoraStringFormat.o"
+	@echo "... src/Nesora/NesoraStringFormat.i"
+	@echo "... src/Nesora/NesoraStringFormat.s"
 .PHONY : help
 
 

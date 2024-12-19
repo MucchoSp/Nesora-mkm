@@ -1,0 +1,2 @@
+/usr/bin/ar qc libnesora_main_lib.a CMakeFiles/nesora_main_lib.dir/src/Nesora/Nesora.cpp.o CMakeFiles/nesora_main_lib.dir/src/Nesora/NesoraInterpreter.cpp.o CMakeFiles/nesora_main_lib.dir/src/Nesora/NesoraStringFormat.cpp.o
+/usr/bin/ranlib libnesora_main_lib.a

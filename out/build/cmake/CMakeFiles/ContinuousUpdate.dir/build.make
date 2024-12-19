@@ -53,10 +53,10 @@ RM = /opt/homebrew/Cellar/cmake/3.30.0/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One
+CMAKE_SOURCE_DIR = /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake
+CMAKE_BINARY_DIR = /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake
 
 # Utility rule file for ContinuousUpdate.
 
@@ -82,6 +82,6 @@ CMakeFiles/ContinuousUpdate.dir/clean:
 .PHONY : CMakeFiles/ContinuousUpdate.dir/clean
 
 CMakeFiles/ContinuousUpdate.dir/depend:
-	cd /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-One/out/build/cmake/CMakeFiles/ContinuousUpdate.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake /Users/muchosp/Documents/MucchoSP/音諳/音諳プロジェクト/Nesora-mkm/out/build/cmake/CMakeFiles/ContinuousUpdate.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/ContinuousUpdate.dir/depend
 
