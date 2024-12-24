@@ -29,14 +29,27 @@ namespace nesora{
     class NesoraWaveFile{
     private:
         std::vector<nsfloat> buffer;
-        nsuint sampling_frequency = 480000;
-        
+        nsuint samplingFrequency = 48000;
+		uint16_t channelNum = 1;		    //チャンネル数
+		uint16_t bitPerSample = 16;		    //量子化ビット数
+
+        WaveFileMetaData metaData;
 
     public:
         NesoraWaveFile();
         NesoraWaveFile(const std::vector<nsfloat>&);
 
-        int save(const std::string &);
+        int save(std::string);
+
+        void SetMetaData(const WaveFileMetaData&);
+        WaveFileMetaData GetMetaData();
+        const WaveFileMetaData& GetMetaData() const;
+
+        void SetWave(const std::vector<nsfloat> &);
+        std::vector<nsfloat> GetWave();
+
+        void SetSamplingFrequency(const nsuint& smpl);
+        nsuint GetSamplingFrequency();
     };
 
 }//namespace nesora

@@ -12,6 +12,7 @@
 #include <cstdint>
 
 #include "NesoraStringFormat.h"
+#include "Nesoraio.h"
 
 
 namespace nesora{

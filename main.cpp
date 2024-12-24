@@ -1,7 +1,6 @@
 #include <iostream>
 #include "src/Nesora/Nesora.h"
 
-
 nesora::NesoraDictionary testDictionary(){
     nesora::NesoraDictionary dictionary;
     nesora::NesoraWord word;
@@ -47,8 +46,16 @@ int main(int, char**){
     for(auto a : output){
         std::cout << " 0x" << std::hex << unsigned(a.buffer.back());
     }
-    
+
     std::cout << std::endl << "Finish!" << std::endl;
+
+    std::vector<nesora::nsfloat> waves(48000 * 5);
+    for (int i = 0; i < waves.size();i++) {
+        waves[i] = std::sin((float)i * 2.0 * nesora::ns_pi / 48000.0 * 440.0) * 0.5;
+    }
+    nesora::NesoraWaveFile wavefile;
+    wavefile.SetWave(waves);
+    wavefile.save("generated/test_A.wav");
 
     return 0;
 }
