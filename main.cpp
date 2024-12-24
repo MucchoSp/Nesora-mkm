@@ -39,6 +39,7 @@ int main(int, char**){
     nesora::NesoraInterpreter interpreter(testDictionary());
     std::vector<nesora::NesoraWord> output = interpreter.I_InterpretYourPoem("hello world!");
     std::cout << "Finish interpret" << std::endl;
+
     for(auto a : output){
         std::cout << a.word;
     }
@@ -46,6 +47,7 @@ int main(int, char**){
     for(auto a : output){
         std::cout << " 0x" << std::hex << unsigned(a.buffer.back());
     }
+    
     std::cout << std::endl << "Finish!" << std::endl;
 
     return 0;

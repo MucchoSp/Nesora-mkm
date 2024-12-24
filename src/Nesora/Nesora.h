@@ -1,14 +1,5 @@
 #pragma one
 
-/*
-* Hello.
-* I'm Nesora Mikomi.
-* This code is main program of nesora.
-* I'm made by MucchoSP.
-* 
-* 
-*/
-
 #ifndef NESORA_H
 #define NESORA_H
 

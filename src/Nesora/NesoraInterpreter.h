@@ -92,11 +92,10 @@ namespace nesora_literals {
     inline nesora::NesoraLanguageCode operator""_NSLC(const char* val){
         std::string str = val;
         nesora::NesoraLanguageCode nslc;
-        if (str.substr(0, 2) == "0x" || str.substr(0, 2) == "0X")
-        {                                                                // とりあえず符号無し16進数のみ許可
+        if (str.substr(0, 2) == "0x" || str.substr(0, 2) == "0X") {      // とりあえず符号無し16進数のみ許可
             str.erase(0, 2);                                             // 接頭辞 (0x) の除去
             str.erase(std::remove(std::begin(str), std::end(str), '\''), // 区切り文字 (') を後ろに追いやって
-                        std::end(str));                                    // 除去する
+                        std::end(str));                                  // 除去する
             int len = std::size(str);
             if (len > 24)
                 nslc.language = std::stoull(str.substr(0, (std::max)(0, len - 24)), nullptr, 16); // 前半8文字分を16進数で変換
