@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5.0)
 project(Nesora-mkm VERSION 0.1.0 LANGUAGES C CXX)
 
 # Request the required wxWidgets libs
-add_subdirectory(wxWidgets)
+add_subdirectory(lib/wxWidgets)
 
 include(CTest)
 enable_testing()
