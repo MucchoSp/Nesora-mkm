@@ -2,13 +2,14 @@
 
 
 
-bool MyApp::OnInit() {
-    MyFrame *frame = new MyFrame(nullptr, wxID_ANY, "My test app");
+bool NesoraApp::OnInit() {
+    wxInitAllImageHandlers();
+    NesoraFrame *frame = new NesoraFrame(nullptr, wxID_ANY, "My test app", wxDefaultPosition, wxSize(768, 576));
     frame->Show(true);
     return true;
 }
 
-MyFrame::MyFrame(
+NesoraFrame::NesoraFrame(
     wxWindow* parent,
     wxWindowID id,
     const wxString& title,
@@ -31,14 +32,14 @@ MyFrame::MyFrame(
  
     SetMenuBar(menuBar);
 
-    Bind(wxEVT_MENU, &MyFrame::OnHello, this, ID_Hello);
-    Bind(wxEVT_MENU, &MyFrame::OnAbout, this, wxID_ABOUT);
-    Bind(wxEVT_MENU, &MyFrame::OnExit, this, wxID_EXIT);
+    Bind(wxEVT_MENU, &NesoraFrame::OnHello, this, ID_Hello);
+    Bind(wxEVT_MENU, &NesoraFrame::OnAbout, this, wxID_ABOUT);
+    Bind(wxEVT_MENU, &NesoraFrame::OnExit, this, wxID_EXIT);
  
     CreateStatusBar();
     SetStatusText("Welcome to wxWidgets!");
 
-    //パネル（親widgetはこのthisつまりmyFrame）
+    //パネル（親widgetはこのthisつまりNesoraFrame）
     panel = new wxPanel(this, wxID_ANY);
 
     //テキストコントロール（親widgetはpanel）
@@ -48,19 +49,18 @@ MyFrame::MyFrame(
     button_uc = new wxButton(panel, wxID_ANY, "UpperCase");
     button_lc = new wxButton(panel, wxID_ANY, "LowerCase");
 
-    //サイザー（垂直方向に詰める）
-    auto vsizer = new wxBoxSizer(wxVERTICAL);
+    //ツリーコントロール（親widgetはpanel）
+    treectrl = new wxTreeCtrl(panel, ID_MANAGER_TREE, wxDefaultPosition, wxSize(256, 64), wxTR_DEFAULT_STYLE);
+    wxTreeItemId root    = treectrl->AddRoot("Nesora Mikomi/str");
+    SetFileTree("./src", root);
+    treectrl->Bind(wxEVT_LEFT_DCLICK, [=](wxMouseEvent &event) {
+            auto text = treectrl->GetItemText(treectrl->GetSelection());
+            textCtrl->SetValue(text); });
 
-    //サイザー（水平方向に詰める）
-    auto hsizer = new wxBoxSizer(wxHORIZONTAL);
+    bitmap.LoadFile("assets/64x64.png", wxBITMAP_TYPE_PNG);
+    button1 = new wxBitmapButton(panel, wxID_ANY, bitmap, wxDefaultPosition, wxSize(64, 64));
 
-    //レイアウトを整える
-    panel->SetSizer(vsizer);
-
-    vsizer->Add(textCtrl, 0, wxALIGN_CENTER);
-    vsizer->Add(hsizer, 0, wxALIGN_CENTER);
-    hsizer->Add(button_uc, 0, wxALIGN_CENTER);
-    hsizer->Add(button_lc, 0, wxALIGN_CENTER);
+    SetLayout();
 
     //UpperCaseボタンを押したら、TextCtrlの文字列をUpperCaseする
     button_uc->Bind(wxEVT_BUTTON, [=](wxCommandEvent& event) {
@@ -90,15 +90,45 @@ MyFrame::MyFrame(
 
 }
 
-void MyFrame::OnExit(wxCommandEvent& event) {
+void NesoraFrame::OnExit(wxCommandEvent& event) {
     Close(true);
 }
 
-void MyFrame::OnAbout(wxCommandEvent& event) {
+void NesoraFrame::OnAbout(wxCommandEvent& event) {
     wxMessageBox("This is a wxWidgets Hello World example", "About Hello World", wxOK | wxICON_INFORMATION);
 }
 
-void MyFrame::OnHello(wxCommandEvent& event) {
+void NesoraFrame::OnHello(wxCommandEvent& event) {
     wxLogMessage("Hello world from wxWidgets!");
 }
 
+void NesoraFrame::SetFileTree(std::string path, wxTreeItemId id) {
+    for(const std::filesystem::directory_entry &i:std::filesystem::directory_iterator(path)) {
+        if(i.is_directory()) {
+            wxTreeItemId directry = treectrl->AppendItem(id, i.path().filename().string());
+            SetFileTree(i.path().string(), directry);
+        } else {
+            treectrl->AppendItem(id, i.path().filename().string());
+        }
+    }
+}
+
+void NesoraFrame::SetLayout() {
+    // サイザー (一番大きいやつ)
+    auto mainSizer = new wxBoxSizer(wxHORIZONTAL);
+    // サイザー（垂直方向に詰める）
+    auto vsizer = new wxBoxSizer(wxVERTICAL);
+    //サイザー（水平方向に詰める）
+    auto hsizer = new wxBoxSizer(wxHORIZONTAL);
+
+    //レイアウトを整える
+    panel->SetSizer(mainSizer);
+
+    mainSizer->Add(button1, 0, wxALIGN_LEFT);
+    mainSizer->Add(treectrl, 0, wxALL | wxEXPAND);
+    mainSizer->Add(vsizer, 0, wxALIGN_LEFT);
+    vsizer->Add(textCtrl, 0, wxALIGN_CENTER);
+    vsizer->Add(hsizer, 0, wxALIGN_CENTER);
+    hsizer->Add(button_uc, 0, wxALIGN_CENTER);
+    hsizer->Add(button_lc, 0, wxALIGN_CENTER);
+}

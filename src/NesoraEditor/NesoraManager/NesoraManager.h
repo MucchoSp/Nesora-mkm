@@ -3,17 +3,30 @@
 #define NESORA_MANAGER_H
 
 #include <iostream>
+#include <filesystem>
+
 #include <wx/wx.h>
+#include <wx/treectrl.h>
+
 #include "../Common/NesoraWindowIDs.h"
 
-class MyApp : public wxApp {
+class NesoraApp : public wxApp {
 public:
     virtual bool OnInit();
-};
 
-class MyFrame : public wxFrame {
+    void SetShowImages(bool show) { m_showImages = show; }
+    bool ShowImages() const { return m_showImages; }
+
+    void SetShowStates(bool show) { m_showStates = show; }
+    bool ShowStates() const { return m_showStates; }
+
+private:
+    bool m_showImages, m_showStates, m_showButtons;
+};//class NesoraApp
+
+class NesoraFrame : public wxFrame {
 public:
-    MyFrame(
+    NesoraFrame(
         wxWindow* parent,
         wxWindowID id,
         const wxString& title,
@@ -32,15 +45,24 @@ private:
     wxTextCtrl* textCtrl;
     wxButton* button_uc;
     wxButton* button_lc;
+    wxTreeCtrl* treectrl;
+    wxBitmapButton *button1;
+
+    wxBitmap bitmap;
 
     void OnHello(wxCommandEvent& event);
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
-};
+
+    void SetFileTree(std::string path, wxTreeItemId id);
+    void SetLayout();
+}; // class NesoraFrame
 
 enum {
-    ID_Hello = 1
+    ID_Hello = nesoraEditorID::NS_ID_MANAGER_START,
+    ID_MANAGER_TREE
 };
 
+wxDECLARE_APP(NesoraApp);
 
-#endif
+#endif //NESORA_MANAGER_H

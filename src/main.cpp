@@ -4,7 +4,7 @@
 
 #include "NesoraEditor/NesoraManager/NesoraManager.h"
 
-wxIMPLEMENT_APP(MyApp);
+wxIMPLEMENT_APP(NesoraApp);
 
 
 /*

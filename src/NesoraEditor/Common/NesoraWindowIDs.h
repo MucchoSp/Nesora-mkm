@@ -5,8 +5,13 @@
 
 #include <wx/defs.h>
 
-enum mainID{
-    
-}
+constexpr int NS_ID_MANAGER_LEN = 100;
+
+enum nesoraEditorID {
+
+    NS_ID_MANAGER_START = wxID_HIGHEST,
+    NS_ID_MANAGER_END = NS_ID_MANAGER_START + NS_ID_MANAGER_LEN
+
+};
 
 #endif
