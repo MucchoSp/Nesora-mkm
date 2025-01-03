@@ -51,15 +51,20 @@ private:
     wxBitmap bitmap;
 
     void OnHello(wxCommandEvent& event);
-    void OnExit(wxCommandEvent& event);
+    void OnNesora(wxCommandEvent &event);
+    void OnExit(wxCommandEvent &event);
     void OnAbout(wxCommandEvent& event);
 
     void SetFileTree(std::string path, wxTreeItemId id);
     void SetLayout();
+
+    void SetNesoraMenuBar();
 }; // class NesoraFrame
 
 enum {
     ID_Hello = nesoraEditorID::NS_ID_MANAGER_START,
+    ID_Hello_Nesora,
+    ID_Help_Nesora,
     ID_MANAGER_TREE
 };
 
