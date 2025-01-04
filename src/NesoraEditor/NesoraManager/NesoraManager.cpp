@@ -1,7 +1,6 @@
 #include "NesoraManager.h"
 
 
-
 bool NesoraApp::OnInit() {
     wxInitAllImageHandlers();
     NesoraFrame *frame = new NesoraFrame(nullptr, wxID_ANY, "My test app", wxDefaultPosition, wxSize(768, 576));

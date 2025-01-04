@@ -2,18 +2,18 @@
 
 void NesoraFrame::SetNesoraMenuBar() {
     menuFile = new wxMenu;
-    menuFile->Append(ID_Hello, "&Hello...", "Help string shown in status bar for this menu item");
-    menuFile->Append(ID_Hello_Nesora, "&Nesora...\tCtrl-N", "Help string shown in status bar for this menu item");
+    menuFile->Append(ID_Hello, "nesora.manager.menubar.file.hello"_ns_locale, "Help string shown in status bar for this menu item");
+    menuFile->Append(ID_Hello_Nesora, "nesora.manager.menubar.file.nesora"_ns_locale, "Help string shown in status bar for this menu item");
     menuFile->AppendSeparator();
     menuFile->Append(wxID_EXIT);
  
     menuHelp = new wxMenu;
-    menuHelp->Append(ID_Help_Nesora, "&About Nesora...\tCtrl-H", "About Nesora");
+    menuHelp->Append(ID_Help_Nesora, "nesora.manager.menubar.help.aboutNesora"_ns_locale, "About Nesora");
     menuHelp->Append(wxID_ABOUT);
 
     menuBar = new wxMenuBar;
-    menuBar->Append(menuFile, "&File");
-    menuBar->Append(menuHelp, "&Help");
+    menuBar->Append(menuFile, "nesora.manager.menubar.file"_ns_locale);
+    menuBar->Append(menuHelp, "nesora.manager.menubar.help"_ns_locale);
  
     SetMenuBar(menuBar);
 

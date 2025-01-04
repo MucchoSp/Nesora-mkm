@@ -4,9 +4,17 @@ nesoɾä mʲikomʲi
 だってこれがオリジナルだからね
 
 ɾ nesora.manager.menubar.file
-ファイル
+&ファイル
+ɾ nesora.manager.menubar.file.hello
+&ハロー...
+ɾ nesora.manager.menubar.file.nesora
+&音諳...	Ctrl-N
 ɾ nesora.manager.menubar.edit
-編集
+&編集
 ɾ nesora.manager.menubar.help
-ヘルプ
+&ヘルプ
+ɾ nesora.manager.menubar.help.aboutNesora
+&音諳について...	Ctrl-H
+ɾ nesora.manager.menubar.help
+ɾ nesora.manager.menubar.help
 

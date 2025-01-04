@@ -9,6 +9,7 @@
 #include <wx/treectrl.h>
 
 #include "../Common/NesoraWindowIDs.h"
+#include "../Common/NesoraLocale.h"
 
 class NesoraApp : public wxApp {
 public:
