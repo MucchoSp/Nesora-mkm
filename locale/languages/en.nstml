@@ -1,24 +1,22 @@
 nesoɾä mʲikomʲi
-ä これは日本語の翻訳ファイルだよ
-このファイルは変更しないでね
-だってこれがオリジナルだからね
+ä This is English translator file.
 
 ɾ language.name
-日本語
+English
 ɾ nesora.app.name
-音諳一号機の零型
+Nesora I type 0
 ɾ nesora.manager.menubar.file
-&ファイル
+&File
 ɾ nesora.manager.menubar.file.hello
-&ハロー
+&Hello
 ɾ nesora.manager.menubar.file.nesora
-&音諳	Ctrl-N
+&Nesora	Ctrl-N
 ɾ nesora.manager.menubar.edit
-&編集
+&Edit
 ɾ nesora.manager.menubar.help
-&ヘルプ
+&Help
 ɾ nesora.manager.menubar.help.aboutNesora
-&音諳について	Ctrl-H
+&About Nesora	Ctrl-H
 ɾ nesora.manager.menubar.help
 ɾ nesora.manager.menubar.help
 

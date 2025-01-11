@@ -3,7 +3,7 @@
 
 bool NesoraApp::OnInit() {
     wxInitAllImageHandlers();
-    NesoraFrame *frame = new NesoraFrame(nullptr, wxID_ANY, "My test app", wxDefaultPosition, wxSize(768, 576));
+    NesoraFrame *frame = new NesoraFrame(nullptr, wxID_ANY, "nesora.app.name"_ns_locale, wxDefaultPosition, wxSize(768, 576));
     frame->Show(true);
     return true;
 }

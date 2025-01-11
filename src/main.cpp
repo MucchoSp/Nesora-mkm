@@ -2,7 +2,10 @@
 //#include "Nesora/Nesora.h"
 //#include <wx/wx.h>
 
+#include "NesoraEditor/Common/NesoraLocale.h"
 #include "NesoraEditor/NesoraManager/NesoraManager.h"
+
+nesora::NesoraMarkupLanguage nesora::locale::language{"locale/languages/jp.nstml"};
 
 wxIMPLEMENT_APP(NesoraApp);
 

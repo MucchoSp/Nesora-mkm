@@ -63,5 +63,3 @@ std::string nesora::NesoraMarkupLanguage::operator[](const std::string& key) {
 const std::string nesora::NesoraMarkupLanguage::operator[](const std::string& key) const {
     return buffer.at(key);
 }
-
-nesora::NesoraMarkupLanguage nesora::locale::language{"locale/languages/jp.nstml"};

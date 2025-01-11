@@ -8,8 +8,6 @@ namespace nesora {
 
         extern NesoraMarkupLanguage language;
 
-
-
     }//namespace locale
 }//namespace nesora
 
