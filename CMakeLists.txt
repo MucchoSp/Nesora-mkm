@@ -13,12 +13,12 @@ add_library(nesora_main_lib STATIC ${NESORA_MAIN_SOURCES})
 
 file(GLOB_RECURSE NESORA_GUI_SOURCES "src/NesoraEditor/*.cpp")
 add_library(nesora_gui_lib STATIC ${NESORA_GUI_SOURCES})
-target_link_libraries(nesora_gui_lib wx::net wx::core wx::base)
+target_link_libraries(nesora_gui_lib wx::net wx::core wx::base wx::aui)
 
 add_executable(main src/main.cpp)
 target_link_libraries(main nesora_main_lib)
 target_link_libraries(main nesora_gui_lib)
-target_link_libraries(main wx::net wx::core wx::base)
+target_link_libraries(main wx::net wx::core wx::base wx::aui)
 
 # C++の標準規格の指定
 target_compile_features(nesora_main_lib PUBLIC cxx_std_17)

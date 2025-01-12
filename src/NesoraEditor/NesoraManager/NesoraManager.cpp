@@ -3,7 +3,7 @@
 
 bool NesoraApp::OnInit() {
     wxInitAllImageHandlers();
-    NesoraFrame *frame = new NesoraFrame(nullptr, wxID_ANY, "nesora.app.name"_ns_locale, wxDefaultPosition, wxSize(768, 576));
+    NesoraFrame *frame = new NesoraFrame(nullptr, wxID_ANY, "nesora.app.name"_ns_locale, wxDefaultPosition, wxSize(1280, 720));
     frame->Show(true);
     return true;
 }
@@ -25,52 +25,42 @@ NesoraFrame::NesoraFrame(
     //パネル（親widgetはこのthisつまりNesoraFrame）
     panel = new wxPanel(this, wxID_ANY);
 
-    //テキストコントロール（親widgetはpanel）
-    textCtrl = new wxTextCtrl(panel, wxID_ANY);
-
-    //ボタン（親widgetはpanel）
-    button_uc = new wxButton(panel, wxID_ANY, "UpperCase");
-    button_lc = new wxButton(panel, wxID_ANY, "LowerCase");
-
     //ツリーコントロール（親widgetはpanel）
     treectrl = new wxTreeCtrl(panel, ID_MANAGER_TREE, wxDefaultPosition, wxSize(256, 64), wxTR_DEFAULT_STYLE);
     wxTreeItemId root    = treectrl->AddRoot("Nesora Mikomi/str");
     SetFileTree("./src", root);
     treectrl->Bind(wxEVT_LEFT_DCLICK, [=](wxMouseEvent &event) {
             auto text = treectrl->GetItemText(treectrl->GetSelection());
-            textCtrl->SetValue(text); });
+            if(tabs.size()) {
+                int nowSelection = notebook->GetSelection();
+                auto newTab = tabs.insert(tabs.begin() + nowSelection, new wxPanel(notebook, wxID_ANY));
+                notebook->InsertPage(nowSelection + 1, *newTab, text, true);
+            } else {
+                tabs.push_back(new wxPanel(notebook, wxID_ANY));
+                notebook->AddPage(new wxPanel(notebook, wxID_ANY), text);
+                notebook->SetSelection(0);
+            }});
+        
 
     //絵ボタン (親widgetはplanel)
     bitmap.LoadFile("assets/64x64.png", wxBITMAP_TYPE_PNG);
     button1 = new wxBitmapButton(panel, wxID_ANY, bitmap, wxDefaultPosition, wxSize(64, 64));
 
+    // Create the wxNotebook widget
+    notebook = new wxAuiNotebook(panel, wxID_ANY, wxDefaultPosition, FromDIP(wxSize(200,-1)), wxAUI_NB_DEFAULT_STYLE);
+    notebook->SetArtProvider(new NesoraTabArt);
+    notebook->Bind(wxEVT_AUINOTEBOOK_PAGE_CLOSE, [=](wxAuiNotebookEvent & event){
+                int nowSelection = notebook->GetSelection();
+                tabs.erase(tabs.begin() + nowSelection);
+            });
+
+    // Add 2 pages to the wxNotebook widget
+    // tabs.push_back(new wxPanel(notebook, wxID_ANY));
+    // notebook->AddPage(tabs[0], "Tab 1");
+    // tabs.push_back(new wxPanel(notebook, wxID_ANY));
+    // notebook->AddPage(tabs[1], "Tab 2");
+
     SetLayout();
-
-    //UpperCaseボタンを押したら、TextCtrlの文字列をUpperCaseする
-    button_uc->Bind(wxEVT_BUTTON, [=](wxCommandEvent& event) {
-        //ダイアログ（親widgetはこのthisつまりmyFrame）
-        auto dialog = wxMessageDialog(this, "テキストをUpperCaseしますか？", "タイトル", wxCANCEL);
-
-        //ダイアログを表示して、OKボタンを押したらテキストの変換を実施する
-        if(dialog.ShowModal() == wxID_OK) {
-            auto text = textCtrl->GetValue();
-            text.UpperCase();
-            textCtrl->SetValue(text);
-        }
-    });
-
-    //LowerCaseボタンを押したら、TextCtrlの文字列をLowerCaseする
-    button_lc->Bind(wxEVT_BUTTON, [=](wxCommandEvent& event) {
-        //ダイアログ（親widgetはこのthisつまりmyFrame）
-        auto dialog = wxMessageDialog(this, "テキストをlowerCaseしますか？", "タイトル", wxCANCEL);
-
-        //ダイアログを表示して、OKボタンを押したらテキストの変換を実施する    
-        if(dialog.ShowModal() == wxID_OK) {
-            auto text = textCtrl->GetValue();
-            text.LowerCase();
-            textCtrl->SetValue(text);
-        }
-    });
 
 }
 
@@ -88,19 +78,12 @@ void NesoraFrame::SetFileTree(std::string path, wxTreeItemId id) {
 void NesoraFrame::SetLayout() {
     // サイザー (一番大きいやつ)
     auto mainSizer = new wxBoxSizer(wxHORIZONTAL);
-    // サイザー（垂直方向に詰める）
-    auto vsizer = new wxBoxSizer(wxVERTICAL);
-    //サイザー（水平方向に詰める）
-    auto hsizer = new wxBoxSizer(wxHORIZONTAL);
 
     //レイアウトを整える
     panel->SetSizer(mainSizer);
 
     mainSizer->Add(button1, 0, wxALIGN_LEFT);
     mainSizer->Add(treectrl, 0, wxALL | wxEXPAND);
-    mainSizer->Add(vsizer, 0, wxALIGN_LEFT);
-    vsizer->Add(textCtrl, 0, wxALIGN_CENTER);
-    vsizer->Add(hsizer, 0, wxALIGN_CENTER);
-    hsizer->Add(button_uc, 0, wxALIGN_CENTER);
-    hsizer->Add(button_lc, 0, wxALIGN_CENTER);
+    mainSizer->Add(notebook, 1, wxEXPAND);
 }
+
