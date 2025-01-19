@@ -4,15 +4,21 @@
 
 #include <iostream>
 #include <filesystem>
+#include <dlfcn.h>
 
 #include <wx/wx.h>
 #include <wx/aui/aui.h>
 #include <wx/treectrl.h>
 #include <wx/artprov.h>
+#include <wx/splitter.h>
 
 #include "../Common/NesoraWindowIDs.h"
 #include "../Common/NesoraLocale.h"
 #include "../Common/Nesora_wx/NesoraTabart.h"
+#include "../Common/NesoraPluginHeader.h"
+
+// #include "NesoraDefaultTextEditor.h"
+
 
 class NesoraApp : public wxApp {
 public:
@@ -46,7 +52,8 @@ private:
     wxMenuBar *menuBar;
 
     wxPanel* panel;
-    wxTreeCtrl* treectrl;
+    wxSplitterWindow *splitter;
+    wxTreeCtrl *treectrl;
     wxBitmapButton* button1;
     wxAuiNotebook *notebook;
     std::vector<wxPanel*> tabs;

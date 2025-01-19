@@ -25,40 +25,73 @@ NesoraFrame::NesoraFrame(
     //パネル（親widgetはこのthisつまりNesoraFrame）
     panel = new wxPanel(this, wxID_ANY);
 
-    //ツリーコントロール（親widgetはpanel）
-    treectrl = new wxTreeCtrl(panel, ID_MANAGER_TREE, wxDefaultPosition, wxSize(256, 64), wxTR_DEFAULT_STYLE);
+
+
+    //ツリーコントロールとノートブックウィジェットを分割するやつ
+    splitter = new wxSplitterWindow(panel, wxID_ANY);
+    splitter->SetMinimumPaneSize(20);
+
+    //ツリーコントロール（親widgetはsplitter）
+    treectrl = new wxTreeCtrl(splitter, ID_MANAGER_TREE, wxDefaultPosition, wxDefaultSize, wxTR_DEFAULT_STYLE);
     wxTreeItemId root    = treectrl->AddRoot("Nesora Mikomi/str");
     SetFileTree("./src", root);
     treectrl->Bind(wxEVT_LEFT_DCLICK, [=](wxMouseEvent &event) {
             auto text = treectrl->GetItemText(treectrl->GetSelection());
-            if(tabs.size()) {
+            // wxPanel *panel = new wxPanel(notebook, wxID_ANY);
+
+            const auto addlib = dlopen("./plugin/libNesoraPlugin_DefaultTextEditorlib.dylib", RTLD_LAZY);
+            // const auto addlib = dlopen("./NesoraPlugin/DefaultTextEditor/out/build/cmake/libNesoraPlugin_DefaultTextEditorlib.dylib", RTLD_LAZY);
+            if (addlib == NULL) {
+                const char* const error_message = dlerror();
+                std::cerr << error_message << std::endl;
+                return 1;
+            }
+            //MACなので、.dylibにしています。Linuxならば、.soにしてください。
+
+            void* const addfunc = dlsym(addlib, "makeObject");
+            {
+                const char* const error_message = dlerror();
+                if (error_message != NULL) {
+                    std::cerr << error_message << std::endl;
+                    dlclose(addfunc);
+                    return 1;
+                }
+            }
+            auto panel = reinterpret_cast<wxPanel*(*)(wxWindow*, wxWindowID)>(addfunc)(notebook, wxID_ANY);
+
+            dlclose(addfunc);
+            // wxWindow* textCtrl = new NesoraTextEditor();
+            // textCtrl->Create(panel, wxID_ANY);
+
+            if (tabs.size())
+            {
                 int nowSelection = notebook->GetSelection();
-                auto newTab = tabs.insert(tabs.begin() + nowSelection, new wxPanel(notebook, wxID_ANY));
+                auto newTab = tabs.insert(tabs.begin() + nowSelection, panel);
                 notebook->InsertPage(nowSelection + 1, *newTab, text, true);
-            } else {
-                tabs.push_back(new wxPanel(notebook, wxID_ANY));
-                notebook->AddPage(new wxPanel(notebook, wxID_ANY), text);
+            }
+            else
+            {
+                tabs.push_back(panel);
+                notebook->AddPage(tabs[0], text);
                 notebook->SetSelection(0);
             }});
+    treectrl->Expand(root);
         
-
-    //絵ボタン (親widgetはplanel)
-    bitmap.LoadFile("assets/64x64.png", wxBITMAP_TYPE_PNG);
-    button1 = new wxBitmapButton(panel, wxID_ANY, bitmap, wxDefaultPosition, wxSize(64, 64));
-
     // Create the wxNotebook widget
-    notebook = new wxAuiNotebook(panel, wxID_ANY, wxDefaultPosition, FromDIP(wxSize(200,-1)), wxAUI_NB_DEFAULT_STYLE);
+    notebook = new wxAuiNotebook(splitter, wxID_ANY, wxDefaultPosition, FromDIP(wxSize(200,-1)), wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_EXTERNAL_MOVE);
     notebook->SetArtProvider(new NesoraTabArt);
     notebook->Bind(wxEVT_AUINOTEBOOK_PAGE_CLOSE, [=](wxAuiNotebookEvent & event){
                 int nowSelection = notebook->GetSelection();
                 tabs.erase(tabs.begin() + nowSelection);
             });
 
-    // Add 2 pages to the wxNotebook widget
-    // tabs.push_back(new wxPanel(notebook, wxID_ANY));
-    // notebook->AddPage(tabs[0], "Tab 1");
-    // tabs.push_back(new wxPanel(notebook, wxID_ANY));
-    // notebook->AddPage(tabs[1], "Tab 2");
+    splitter->SplitVertically(treectrl, notebook, 256);
+
+
+
+    //絵ボタン (親widgetはplanel)
+    bitmap.LoadFile("assets/64x64.png", wxBITMAP_TYPE_PNG);
+    button1 = new wxBitmapButton(panel, wxID_ANY, bitmap, wxDefaultPosition, wxSize(64, 64));
 
     SetLayout();
 
@@ -83,7 +116,6 @@ void NesoraFrame::SetLayout() {
     panel->SetSizer(mainSizer);
 
     mainSizer->Add(button1, 0, wxALIGN_LEFT);
-    mainSizer->Add(treectrl, 0, wxALL | wxEXPAND);
-    mainSizer->Add(notebook, 1, wxEXPAND);
+    mainSizer->Add(splitter, 1, wxEXPAND);
 }
 

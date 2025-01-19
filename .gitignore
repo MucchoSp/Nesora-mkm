@@ -9,3 +9,6 @@ memo.txt
 
 # OSが生成したファイル
 .DS_Store
+
+# なんか新しくできたやつ
+CMakeFiles
