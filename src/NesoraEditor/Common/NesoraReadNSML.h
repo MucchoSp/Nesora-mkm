@@ -13,6 +13,7 @@ namespace nesora {
     class NesoraMarkupLanguage {
     private:
         std::map<std::string, std::string> buffer = {};
+        std::vector<std::string> keyList = {};
 
     public:
         NesoraMarkupLanguage();
@@ -25,6 +26,9 @@ namespace nesora {
 
         std::string operator[](const std::string&);
         const std::string operator[](const std::string&) const;
+
+        std::string operator[](const size_t&);
+        const std::string operator[](const size_t&) const;
 
     }; // class NesoraMarkupLanguage
 

@@ -29,9 +29,10 @@ int nesora::NesoraMarkupLanguage::LoadFile(const std::string& filename) {
         }
         else if(str.rfind("ɾ ", 0) == 0) {
             nowKey = str.substr(3);
-            if(buffer.count(nowKey))
+            if (buffer.count(nowKey))
                 nowState = 0;
             else
+                keyList.push_back(nowKey);
                 nowState = 1;
         }
         else {
@@ -62,4 +63,12 @@ std::string nesora::NesoraMarkupLanguage::operator[](const std::string& key) {
 
 const std::string nesora::NesoraMarkupLanguage::operator[](const std::string& key) const {
     return buffer.at(key);
+}
+
+std::string nesora::NesoraMarkupLanguage::operator[](const size_t& num){
+    return keyList[num];
+}
+
+const std::string nesora::NesoraMarkupLanguage::operator[](const size_t& num) const{
+    return keyList[num];
 }
