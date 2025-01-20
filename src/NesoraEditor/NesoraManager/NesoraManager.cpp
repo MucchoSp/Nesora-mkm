@@ -36,45 +36,60 @@ NesoraFrame::NesoraFrame(
     wxTreeItemId root    = treectrl->AddRoot("Nesora Mikomi/str");
     SetFileTree("./src", root);
     treectrl->Bind(wxEVT_LEFT_DCLICK, [=](wxMouseEvent &event) {
+            wxPanel* editor_panel;
+
             auto text = treectrl->GetItemText(treectrl->GetSelection());
-            // wxPanel *panel = new wxPanel(notebook, wxID_ANY);
+            std::string textstr = text.ToStdString();
 
-            const auto addlib = dlopen("./plugin/libNesoraPlugin_DefaultTextEditorlib.dylib", RTLD_LAZY);
-            // const auto addlib = dlopen("./NesoraPlugin/DefaultTextEditor/out/build/cmake/libNesoraPlugin_DefaultTextEditorlib.dylib", RTLD_LAZY);
-            if (addlib == NULL) {
-                const char* const error_message = dlerror();
-                std::cerr << error_message << std::endl;
-                return 1;
-            }
             //MACなので、.dylibにしています。Linuxならば、.soにしてください。
+            if(textstr.rfind('.') != std::string::npos){
+                if(nesora::plugin::pluginlist_editor.find(textstr.substr(textstr.find_last_of('.')))){
+                    std::string pluginfile = "./plugin/editor/" + nesora::plugin::pluginlist_editor[textstr.substr(textstr.find_last_of('.'))][2];
+                    const auto addlib = dlopen(pluginfile.c_str(), RTLD_LAZY);
+                    if (addlib == NULL) {
+                        const char *const error_message = dlerror();
+                        //std::cerr << error_message << std::endl;
+                        auto dialog = wxMessageDialog(panel, error_message, "error.plugin.notfoundfile"_ns_locale);
+                        dialog.ShowModal();
+                        return 1;
+                    }
 
-            void* const addfunc = dlsym(addlib, "makeObject");
-            {
-                const char* const error_message = dlerror();
-                if (error_message != NULL) {
-                    std::cerr << error_message << std::endl;
+                    void* const addfunc = dlsym(addlib, "makeObject");
+                    {
+                        const char* const error_message = dlerror();
+                        if (error_message != NULL) {
+                            //std::cerr << error_message << std::endl;
+                            auto dialog = wxMessageDialog(panel, error_message, "error.plugin.notfoundfunction"_ns_locale);
+                            dialog.ShowModal();
+                            dlclose(addfunc);
+                            return 1;
+                        }
+                    }
+                    editor_panel = reinterpret_cast<wxPanel*(*)(wxWindow*, wxWindowID)>(addfunc)(notebook, wxID_ANY);
+
                     dlclose(addfunc);
-                    return 1;
+                } else {
+                    editor_panel = new wxPanel(notebook, wxID_ANY);
+                    wxStaticText *error_text = new wxStaticText(editor_panel, wxID_ANY, "error.plugin.notsetup"_ns_locale);
                 }
+            } else {
+                editor_panel = new wxPanel(notebook, wxID_ANY);
+                wxStaticText *error_text = new wxStaticText(editor_panel, wxID_ANY, "error.plugin.notextension"_ns_locale);
             }
-            auto panel = reinterpret_cast<wxPanel*(*)(wxWindow*, wxWindowID)>(addfunc)(notebook, wxID_ANY);
-
-            dlclose(addfunc);
-            // wxWindow* textCtrl = new NesoraTextEditor();
-            // textCtrl->Create(panel, wxID_ANY);
 
             if (tabs.size())
             {
                 int nowSelection = notebook->GetSelection();
-                auto newTab = tabs.insert(tabs.begin() + nowSelection, panel);
+                auto newTab = tabs.insert(tabs.begin() + nowSelection, editor_panel);
                 notebook->InsertPage(nowSelection + 1, *newTab, text, true);
             }
             else
             {
-                tabs.push_back(panel);
+                tabs.push_back(editor_panel);
                 notebook->AddPage(tabs[0], text);
                 notebook->SetSelection(0);
-            }});
+            }
+            return 0; });
     treectrl->Expand(root);
         
     // Create the wxNotebook widget

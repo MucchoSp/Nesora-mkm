@@ -3,6 +3,17 @@ nesoɾä mʲikomʲi
 
 ɾ language.name
 English
+ɾ error
+Error
+ɾ error.plugin.notsetup
+I don't know which plugin to use for files with this extension.(T_T)
+ɾ error.plugin.notextension
+This file doesn't have an extension! Is it a directory?
+If it's a file, it would be nice if it had an extension...
+ɾ error.plugin.notfoundfile
+Nesora can't seem to find the file of the plugin's body.
+ɾ error.plugin.notfoundfunction
+Nesora can't seem to find the beginning of the plugin.
 ɾ nesora.app.name
 Nesora I type 0
 ɾ nesora.manager.menubar.file

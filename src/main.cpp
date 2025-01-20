@@ -3,9 +3,11 @@
 //#include <wx/wx.h>
 
 #include "NesoraEditor/Common/NesoraLocale.h"
+#include "NesoraEditor/Common/Plugin/NesoraPlugin.h"
 #include "NesoraEditor/NesoraManager/NesoraManager.h"
 
 nesora::NesoraMarkupLanguage nesora::locale::language{"locale/languages/jp.nstml"};
+nesora::NesoraMarkupLanguage_split nesora::plugin::pluginlist_editor{"plugin/editor/pluginlist.nstml"};
 
 wxIMPLEMENT_APP(NesoraApp);
 

@@ -12,10 +12,12 @@
 #include <wx/artprov.h>
 #include <wx/splitter.h>
 
-#include "../Common/NesoraWindowIDs.h"
 #include "../Common/NesoraLocale.h"
+#include "../Common/Plugin/NesoraPlugin.h"
+
+#include "../Common/NesoraWindowIDs.h"
 #include "../Common/Nesora_wx/NesoraTabart.h"
-#include "../Common/NesoraPluginHeader.h"
+#include "../Common/Plugin/NesoraPluginHeader.h"
 
 // #include "NesoraDefaultTextEditor.h"
 

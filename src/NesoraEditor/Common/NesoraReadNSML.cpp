@@ -72,3 +72,86 @@ std::string nesora::NesoraMarkupLanguage::operator[](const size_t& num){
 const std::string nesora::NesoraMarkupLanguage::operator[](const size_t& num) const{
     return keyList[num];
 }
+
+size_t nesora::NesoraMarkupLanguage::find(const std::string& key) const {
+    return buffer.count(key);
+}
+
+
+
+
+
+// MARK:NesoraMarkupLanguage_split
+
+nesora::NesoraMarkupLanguage_split::NesoraMarkupLanguage_split() {
+
+}
+
+nesora::NesoraMarkupLanguage_split::NesoraMarkupLanguage_split(const std::string& filename) {
+    LoadFile(filename);
+}
+
+int nesora::NesoraMarkupLanguage_split::LoadFile(const std::string& filename) {
+    std::ifstream ifs(filename);
+
+    if(!ifs)
+        return 1;
+
+    std::string str;
+    getline(ifs, str);
+    if(!(str == "nesoɾä mʲikomʲi"))
+        return 2;
+
+    buffer.clear();
+    int nowState = 0;
+    std::string nowKey = "";
+    while (getline(ifs, str)) {
+        if(str.rfind("ä ", 0) == 0) {
+            nowState = 0;
+        }
+        else if(str.rfind("ɾ ", 0) == 0) {
+            nowKey = str.substr(3);
+            if (buffer.count(nowKey))
+                nowState = 0;
+            else
+                keyList.push_back(nowKey);
+                nowState = 1;
+        }
+        else {
+            if(nowState) {
+                buffer[nowKey].push_back(str);
+            }
+        }
+    }
+
+    return 0;
+}
+
+std::map<std::string, std::vector<std::string>> nesora::NesoraMarkupLanguage_split::GetNSML(){
+    return buffer;
+}
+
+const std::map<std::string, std::vector<std::string>> nesora::NesoraMarkupLanguage_split::GetNSML() const {
+    return buffer;
+}
+
+std::vector<std::string> nesora::NesoraMarkupLanguage_split::operator[](const std::string& key) {
+    return buffer[key];
+}
+
+const std::vector<std::string> nesora::NesoraMarkupLanguage_split::operator[](const std::string& key) const {
+    return buffer.at(key);
+}
+
+std::string nesora::NesoraMarkupLanguage_split::operator[](const size_t& num){
+    return keyList[num];
+}
+
+const std::string nesora::NesoraMarkupLanguage_split::operator[](const size_t& num) const{
+    return keyList[num];
+}
+
+size_t nesora::NesoraMarkupLanguage_split::find(const std::string& key) const {
+    return buffer.count(key);
+}
+

@@ -5,6 +5,17 @@ nesoɾä mʲikomʲi
 
 ɾ language.name
 日本語
+ɾ error
+エラー
+ɾ error.plugin.notsetup
+この拡張子のファイル、どのプラグインを使えばいいかわからないよ(泣)
+ɾ error.plugin.notextension
+このファイル、拡張子ないんだけど！？ディレクトリだったりしない？
+ファイルなら、拡張子があると嬉しいんだけど...
+ɾ error.plugin.notfoundfile
+音諳はプラグインの本体のファイルを見つけられないようです。
+ɾ error.plugin.notfoundfunction
+音諳はプラグインのはじまりを見つけられないようです。
 ɾ nesora.app.name
 音諳一号機の零型
 ɾ nesora.manager.menubar.file

@@ -1,0 +1,11 @@
+nesoɾä mʲikomʲi
+ä これはプラグイン一覧のファイルだよ
+私が自動生成するものだから、勝手に変更しないでね
+Please don't edit this file.
+
+ɾ .cpp
+Default text editor
+DefaultTextEditor/libNesoraPlugin.dll
+DefaultTextEditor/libNesoraPlugin.dylib
+DefaultTextEditor/libNesoraPlugin.so
+
