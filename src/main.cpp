@@ -7,7 +7,7 @@
 #include "NesoraEditor/NesoraManager/NesoraManager.h"
 
 nesora::NesoraMarkupLanguage nesora::locale::language{"locale/languages/jp.nstml"};
-nesora::NesoraMarkupLanguage_split nesora::plugin::pluginlist_editor{"plugin/editor/pluginlist.nstml"};
+nesora::NesoraMarkupLanguage nesora::plugin::pluginlist_editor{"plugin/editor/pluginlist.nstml"};
 
 wxIMPLEMENT_APP(NesoraApp);
 

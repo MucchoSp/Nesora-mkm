@@ -24,10 +24,17 @@ Nesora I type 0
 &Nesora	Ctrl-N
 ɾ nesora.manager.menubar.edit
 &Edit
+ɾ nesora.manager.menubar.plugin
+&plugin
+ɾ nesora.manager.menubar.plugin.openfile
+&Open plugin directory	Ctrl-P
 ɾ nesora.manager.menubar.help
 &Help
 ɾ nesora.manager.menubar.help.aboutNesora
 &About Nesora	Ctrl-H
+ɾ nesora.manager.plugin.notfounddirectory
+Nesora can't find plugin directory.
+Do I create directory?
 ɾ nesora.manager.menubar.help
 ɾ nesora.manager.menubar.help
 

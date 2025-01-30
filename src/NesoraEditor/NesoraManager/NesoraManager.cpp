@@ -25,17 +25,22 @@ NesoraFrame::NesoraFrame(
     //パネル（親widgetはこのthisつまりNesoraFrame）
     panel = new wxPanel(this, wxID_ANY);
 
+    if(wxPlatformId::MatchesCurrent("msw"))
+        nesoraPlaginDirectory = wxFileName::GetHomeDir().ToStdString() + "/AppData/Local/Nesora/NesoraMikomi/Plugin";
+    else
+        nesoraPlaginDirectory = wxFileName::GetHomeDir().ToStdString() + "/Library/Nesora/NesoraMikomi/Plugin";
+    nesoraProjectDirectory = wxFileName::GetHomeDir().ToStdString() + "/Documents/Nesora/NesoraMikomi/Plugin";
 
-
-    //ツリーコントロールとノートブックウィジェットを分割するやつ
+    // ツリーコントロールとノートブックウィジェットを分割するやつ
     splitter = new wxSplitterWindow(panel, wxID_ANY);
     splitter->SetMinimumPaneSize(20);
 
-    //ツリーコントロール（親widgetはsplitter）
+    // ツリーコントロール（親widgetはsplitter）
     treectrl = new wxTreeCtrl(splitter, ID_MANAGER_TREE, wxDefaultPosition, wxDefaultSize, wxTR_DEFAULT_STYLE);
-    wxTreeItemId root    = treectrl->AddRoot("Nesora Mikomi/str");
+    wxTreeItemId root = treectrl->AddRoot("Nesora Mikomi/str");
     SetFileTree("./src", root);
-    treectrl->Bind(wxEVT_LEFT_DCLICK, [=](wxMouseEvent &event) {
+    treectrl->Bind(wxEVT_LEFT_DCLICK, [=](wxMouseEvent &event)
+                   {
             wxPanel* editor_panel;
 
             auto text = treectrl->GetItemText(treectrl->GetSelection());
@@ -44,7 +49,7 @@ NesoraFrame::NesoraFrame(
             //MACなので、.dylibにしています。Linuxならば、.soにしてください。
             if(textstr.rfind('.') != std::string::npos){
                 if(nesora::plugin::pluginlist_editor.find(textstr.substr(textstr.find_last_of('.')))){
-                    std::string pluginfile = "./plugin/editor/" + nesora::plugin::pluginlist_editor[textstr.substr(textstr.find_last_of('.'))][2];
+                    std::string pluginfile = nesoraPlaginDirectory + std::string("/editor/") + nesora::plugin::pluginlist_editor[textstr.substr(textstr.find_last_of('.'))] + NESORA_PLUGIN_FILE_NAME;
                     const auto addlib = dlopen(pluginfile.c_str(), RTLD_LAZY);
                     if (addlib == NULL) {
                         const char *const error_message = dlerror();
@@ -65,7 +70,7 @@ NesoraFrame::NesoraFrame(
                             return 1;
                         }
                     }
-                    editor_panel = reinterpret_cast<wxPanel*(*)(wxWindow*, wxWindowID)>(addfunc)(notebook, wxID_ANY);
+                    editor_panel = reinterpret_cast<wxPanel*(*)(wxWindow*, wxWindowID, const wxString&)>(addfunc)(notebook, wxID_ANY, ((NesoraTreeItemData*)treectrl->GetItemData(treectrl->GetSelection()))->GetPath());
 
                     dlclose(addfunc);
                 } else {
@@ -73,8 +78,15 @@ NesoraFrame::NesoraFrame(
                     wxStaticText *error_text = new wxStaticText(editor_panel, wxID_ANY, "error.plugin.notsetup"_ns_locale);
                 }
             } else {
-                editor_panel = new wxPanel(notebook, wxID_ANY);
-                wxStaticText *error_text = new wxStaticText(editor_panel, wxID_ANY, "error.plugin.notextension"_ns_locale);
+                std::error_code ec;
+                std::string path = ((NesoraTreeItemData *)treectrl->GetItemData(treectrl->GetSelection()))->GetPath();
+                if (std::filesystem::is_directory(path, ec)) {
+                    editor_panel = new wxPanel(notebook, wxID_ANY);
+                    wxStaticText *error_text = new wxStaticText(editor_panel, wxID_ANY, "directory desu\n" + path);
+                } else {
+                    editor_panel = new wxPanel(notebook, wxID_ANY);
+                    wxStaticText *error_text = new wxStaticText(editor_panel, wxID_ANY, "error.plugin.notextension"_ns_locale);
+                }
             }
 
             if (tabs.size())
@@ -91,20 +103,18 @@ NesoraFrame::NesoraFrame(
             }
             return 0; });
     treectrl->Expand(root);
-        
+
     // Create the wxNotebook widget
-    notebook = new wxAuiNotebook(splitter, wxID_ANY, wxDefaultPosition, FromDIP(wxSize(200,-1)), wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_EXTERNAL_MOVE);
+    notebook = new wxAuiNotebook(splitter, wxID_ANY, wxDefaultPosition, FromDIP(wxSize(200, -1)), wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_EXTERNAL_MOVE);
     notebook->SetArtProvider(new NesoraTabArt);
-    notebook->Bind(wxEVT_AUINOTEBOOK_PAGE_CLOSE, [=](wxAuiNotebookEvent & event){
+    notebook->Bind(wxEVT_AUINOTEBOOK_PAGE_CLOSE, [=](wxAuiNotebookEvent &event)
+                   {
                 int nowSelection = notebook->GetSelection();
-                tabs.erase(tabs.begin() + nowSelection);
-            });
+                tabs.erase(tabs.begin() + nowSelection); });
 
     splitter->SplitVertically(treectrl, notebook, 256);
 
-
-
-    //絵ボタン (親widgetはplanel)
+    // 絵ボタン (親widgetはplanel)
     bitmap.LoadFile("assets/64x64.png", wxBITMAP_TYPE_PNG);
     button1 = new wxBitmapButton(panel, wxID_ANY, bitmap, wxDefaultPosition, wxSize(64, 64));
 
@@ -115,10 +125,10 @@ NesoraFrame::NesoraFrame(
 void NesoraFrame::SetFileTree(std::string path, wxTreeItemId id) {
     for(const std::filesystem::directory_entry &i:std::filesystem::directory_iterator(path)) {
         if(i.is_directory()) {
-            wxTreeItemId directry = treectrl->AppendItem(id, i.path().filename().string());
+            wxTreeItemId directry = treectrl->AppendItem(id, i.path().filename().string(), -1, -1, new NesoraTreeItemData(i.path().string()));
             SetFileTree(i.path().string(), directry);
         } else {
-            treectrl->AppendItem(id, i.path().filename().string());
+            treectrl->AppendItem(id, i.path().filename().string(), -1, -1, new NesoraTreeItemData(i.path().string()));
         }
     }
 }

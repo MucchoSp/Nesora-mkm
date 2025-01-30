@@ -9,7 +9,7 @@
             "request": "launch",
             "preLaunchTask": "build cmake",
             "name": "Debug",
-            "program": "${workspaceFolder}/out/build/cmake/main",
+            "program": "${workspaceFolder}/out/build/cmake/nesora",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal"

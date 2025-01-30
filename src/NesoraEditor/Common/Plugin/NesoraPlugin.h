@@ -6,7 +6,7 @@
 namespace nesora {
     namespace plugin{
 
-        extern NesoraMarkupLanguage_split pluginlist_editor;
+        extern NesoraMarkupLanguage pluginlist_editor;
 
     }//namespace locale
 }//namespace nesora

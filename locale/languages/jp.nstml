@@ -26,10 +26,17 @@ nesoɾä mʲikomʲi
 &音諳	Ctrl-N
 ɾ nesora.manager.menubar.edit
 &編集
+ɾ nesora.manager.menubar.plugin
+&プラグイン
+ɾ nesora.manager.menubar.plugin.openfile
+&プラグインディレクトリを開く	Ctrl-P
 ɾ nesora.manager.menubar.help
 &ヘルプ
 ɾ nesora.manager.menubar.help.aboutNesora
 &音諳について	Ctrl-H
+ɾ nesora.manager.plugin.notfounddirectory
+音諳はプラグインのディレクトリが見つけられないようです。
+ディレクトリを作成しますか？
 ɾ nesora.manager.menubar.help
 ɾ nesora.manager.menubar.help
 
